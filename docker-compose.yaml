@@ -1,0 +1,33 @@
+version: '3.1'
+
+services:
+
+  blog4passion:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: final_project:1
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - 74:80
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql_container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_USERNAME: root
+      MYSQL_DATABASE: blog_admin_db
+  
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - 8082:80
+    environment:
+      - PMA_ARBITRARY=1

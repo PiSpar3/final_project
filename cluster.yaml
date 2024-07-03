@@ -1,0 +1,14 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: myfirst-cluster
+  region: us-west-1
+
+nodeGroups:
+  - name: my-nodegroup
+    instanceType: t2.medium  # Change to a larger instance type
+    desiredCapacity: 4
+    minSize: 1
+    maxSize: 6
+    
