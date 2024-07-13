@@ -1,5 +1,5 @@
-
 #!/bin/bash
+
 display_menu() {
     echo "------- EKSCTL CLUSTER SETUP WITH EBS-CSI Addons --------
                 - Cyclobold Connect --

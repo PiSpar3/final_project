@@ -1,34 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bloggin
+  name: myapp
 spec:
   selector:
     matchLabels:
-      app: bloggin
+      app: myapp
   template:
     metadata:
       labels:
-        app: bloggin
+        app: myapp
     spec:
       containers:
-      - name: finalbloggin
+      - name: blog-app
         image: healerkay/bloggin:2703
         ports:
         - containerPort: 80
 
-
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
-  name: bloggin-service
+  name: myapp-service
 spec:
   selector:
-    app: bloggin
+    app: myapp
   ports:
   - port: 80
     targetPort: 80
-
-  # type: LoadBalancer
+  type: LoadBalancer

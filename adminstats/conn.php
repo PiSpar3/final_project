@@ -6,7 +6,7 @@
 $db_host = "localhost";
 $db_name = "blog_admin_db";
 $db_user = "root";
-$db_pw = "";
+$db_pw = "password";
 
 // DB TABLE INFO
 $GLOBALS['hits_table_name'] = "page_hits";

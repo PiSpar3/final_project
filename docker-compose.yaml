@@ -1,33 +1,36 @@
-version: '3.1'
-
+version: "3.8"
 services:
-
-  blog4passion:
+  bloggin:
     build:
       context: .
       dockerfile: Dockerfile
-    image: final_project:1
+    image: bloggin
     restart: always
+    container_name: bloggin
     depends_on:
       - mysql
     ports:
-      - 74:80
+      - "806:80"
 
   mysql:
     image: mysql:5.7
-    container_name: mysql_container
     restart: always
+    container_name:  mysql-bloggin
+    # ports:
+    #   - "3305:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_ROOT_USERNAME: root
       MYSQL_DATABASE: blog_admin_db
-  
+      MYSQL_ROOT_USER: root 
+      MYSQL_ROOT_PASSWORD: password
+
   phpmyadmin:
     image: phpmyadmin
     restart: always
+    container_name: phpmyadmin
     depends_on:
       - mysql
     ports:
-      - 8082:80
+      - "9196:80"
     environment:
-      - PMA_ARBITRARY=1
+      PMA_HOST: mysql
+      PMA_ARBITRARY: 1
