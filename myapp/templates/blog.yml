@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: blog-app
-        image: healerkay/bloggin:2703
+        image: bejam/final-project:2024
         ports:
         - containerPort: 80
 

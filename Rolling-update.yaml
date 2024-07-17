@@ -1,0 +1,87 @@
+name: deployment for rolling update
+on: 
+  push:
+    branches:
+      - master
+jobs: 
+  app-deployment:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: "first run job"
+        run: |
+          echo "--- welcome to app-deployment: ---"
+
+      ### checkout repository
+      - name: "Checkout"
+        uses: actions/checkout@v4
+
+      ### generate random number as unique id for tag
+      - name: "Create version number"
+        run: |
+          echo "VERSION_NUMBER=${RANDOM}" >> $GITHUB_ENV
+
+      #### replace the <name>/<name> with image name from docker hub    
+      -  name: "Build a Docker image from the repo"
+         run: |
+            docker built -t bejam/final-project:2024:${{ env.VERSION_NUMBER }} .
+
+      ### add the docker username and password as secret in your github repo 
+      - name: "Log into Docker Hub"
+        uses: docker/login-action@v3
+        with: 
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      ### replace the <name>/<name> with image name from docker hub
+      - name: "Push to Docker Hub"
+        run: |
+          docker push bejam/final-project:2024:${{ env.VERSION_NUMBER }}
+
+      ### install kubectl
+      - name: "Install kubectl"
+        uses: azure/setup-kubectl@v3
+        with: 
+          version: "v1.19.3"
+        id: "install-kubectl"
+      
+      ### addd aws credentials asb secret in your github repo
+      - name: "Setup AWS Credentials"
+        uses: aws-actions/configure-aws-credentials@v4
+        with: 
+          aws-region: "us-west-1"
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key:  ${{ secrets.AWS_SECRET_KEY }}
+
+      ### connect to the cluster
+      ### replace the <name> with your cluster name
+
+      - name: "Connect to the cluster"
+        run: |
+          aws eks update-kubeconfig --name mybest-cluster
+
+      ### install helm
+      - name: "Install Helm"
+        uses: azure/setup-helm@v4.2.0
+        id: "install-helm"
+
+      ### install the helm chart, replace the <name> with your helm chart name, set replicaCount to your choice
+      - name: "Use helm to install our charts"
+        run: |
+          helm upgrade --install myapp myapp -f myapp/values.yaml> --set image.tag=${{ env.VERSION_NUMBER}} --set replicaCount=2 
+      
+      #### setup email notification
+      ## replace the <name> with your email
+      ## set up app password from gmail ad copy it as secret in yout github repo
+      ## replace <name>/<name> with image name
+      - name: "Announce the latest version of the deployment"
+        uses: dawidd6/action-send-mail@v3
+        with:
+                username: elishabassey2222@gmail.com
+                password: ${{ secrets.EMAIL_PASSWORD }}
+                server_address: smtp.gmail.com
+                server_port: 465
+                secure: true
+                subject: "New Docker Image Version for bloggin Web App - app-deployment"
+                to: elishabassey2222@gmail.com
+                from: Elisha, elishabassey2222@gmail.com
+                body: "New image build:$ bejam/final-project:2024:${{ env.VERSION_NUMBER }}"
