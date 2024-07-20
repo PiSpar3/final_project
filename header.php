@@ -4,7 +4,7 @@
 			<div class="row">
 				<div class="col-md-4 logo text-left">
 					<a class="navbar-brand" href="index.php">
-						<i class="fab fa-linode"></i> ELISHA WEBSITE LTD</a>
+						<i class="fab fa-linode"></i> ELISHA WEBSITE LTD </a>
 				</div>
 				<div class="col-md-4 top-forms text-center mt-lg-3 mt-md-1 mt-0">
 					<span>Welcome Back!</span>
@@ -59,12 +59,12 @@
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav mr-auto">
 							<li class="nav-item active">
-								<a class="nav-link" href="index.php">Home
+								<a class="nav-link" href="index.php">test
 									<span class="sr-only">(current)</span>
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="about.php">About</a>
+								<a class="nav-link" href="about.php">davido</a>
 							</li>
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
