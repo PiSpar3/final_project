@@ -35,7 +35,7 @@ jobs:
       ### replace the <name>/<name> with image name from docker hub
       - name: "Push to Docker Hub"
         run: |
-          docker push bejam/final-project:2024:${{ env.VERSION_NUMBER }}
+          docker push bejam/final-project:${{ env.VERSION_NUMBER }}
 
       ### install kubectl
       - name: "Install kubectl"
