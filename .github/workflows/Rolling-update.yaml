@@ -23,7 +23,7 @@ jobs:
       #### replace the <name>/<name> with image name from docker hub    
       -  name: "Build a Docker image from the repo"
          run: |
-            docker built -t bejam/final-project:${{ env.VERSION_NUMBER }} .
+            docker build -t bejam/final-project:${{ env.VERSION_NUMBER }} .
 
       ### add the docker username and password as secret in your github repo 
       - name: "Log into Docker Hub"
