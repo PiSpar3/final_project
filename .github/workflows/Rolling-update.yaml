@@ -23,7 +23,7 @@ jobs:
       #### replace the <name>/<name> with image name from docker hub    
       -  name: "Build a Docker image from the repo"
          run: |
-            docker built -t bejam/final-project:2024:${{ env.VERSION_NUMBER }} .
+            docker built -t bejam/final-project:${{ env.VERSION_NUMBER }} .
 
       ### add the docker username and password as secret in your github repo 
       - name: "Log into Docker Hub"
@@ -67,7 +67,7 @@ jobs:
       ### install the helm chart, replace the <name> with your helm chart name, set replicaCount to your choice
       - name: "Use helm to install our charts"
         run: |
-          helm upgrade --install myapp myapp -f myapp/values.yaml> --set image.tag=${{ env.VERSION_NUMBER}} --set replicaCount=2 
+          helm upgrade --install myapp myapp -f myapp/values.yaml --set image.tag=${{ env.VERSION_NUMBER}} --set replicaCount=3 
       
       #### setup email notification
       ## replace the <name> with your email
@@ -84,4 +84,4 @@ jobs:
                 subject: "New Docker Image Version for bloggin Web App - app-deployment"
                 to: elishabassey2222@gmail.com
                 from: Elisha, elishabassey2222@gmail.com
-                body: "New image build:$ bejam/final-project:2024:${{ env.VERSION_NUMBER }}"
+                body: "New image build:$ bejam/final-project:${{ env.VERSION_NUMBER }}"
