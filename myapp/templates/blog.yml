@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: myapp
 spec:
+  replicas: {{ .values.replicas }}
   selector:
     matchLabels:
       app: myapp
@@ -13,7 +14,7 @@ spec:
     spec:
       containers:
       - name: blog-app
-        image: bejam/final-project:2024
+        image: 'bejam/final-project:${{ .values.image.tag }}'
         ports:
         - containerPort: 80
 
