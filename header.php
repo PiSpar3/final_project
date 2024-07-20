@@ -10,7 +10,7 @@
 					<span>Welcome Back!</span>
 					<span class="mx-lg-4 mx-md-2  mx-1">
 						<a href="blogadmin/index.php">
-							<i class="fas fa-lock"></i> <strong>Sign In</strong></a>
+							<i class="fas fa-lock"></i> <strong>it works for me</strong></a>
 					</span>
 					<span>
 						<a href="blogadmin/membership_signup.php">
