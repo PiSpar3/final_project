@@ -23,7 +23,7 @@ jobs:
       #### replace the <name>/<name> with image name from docker hub    
       -  name: "Build a Docker image from the repo"
          run: |
-            docker build -t bejam/final-project:${{ env.VERSION_NUMBER }} .
+            docker build -t elisha23/final-project:${{ env.VERSION_NUMBER }} .
 
       ### add the docker username and password as secret in your github repo 
       - name: "Log into Docker Hub"
@@ -33,9 +33,9 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       ### replace the <name>/<name> with image name from docker hub
-      # - name: "Push to Docker Hub"
-      #   run: |
-      #     docker push bejam/final-project:${{ env.VERSION_NUMBER }}
+      - name: "Push to Docker Hub"
+        run: |
+           docker push elisha23/final-project:${{ env.VERSION_NUMBER }}
 
       ### install kubectl
       - name: "Install kubectl"

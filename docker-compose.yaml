@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: bejam/final-project:2024
+    image: elisha23/final-project:2024
     restart: always
     container_name: bloggin
     depends_on:
